@@ -19,8 +19,9 @@ $(document).ready(function(){
 	  });
 	  return this;
 	};
-
-	//popup block
+    
+	
+    //popup block
 	$('.js-popup-wrap .js-btn-toggle').on('click', function() {
 		if ($(this).hasClass('active')) {
 			$(this).removeClass('active');
@@ -28,7 +29,7 @@ $(document).ready(function(){
 		} else {
 			$('.js-popup-wrap:not(.no-close) .js-btn-toggle').removeClass('active');
 			$(this).addClass('active');
-			if ($(this).parent().hasClass('main-menu-wrap')) {
+			if ($(this).parent().hasClass('popup-menu-wrap')) {
 				$('body').addClass('menu-show');
 			}
 		}
@@ -100,7 +101,60 @@ $(document).ready(function(){
 			$(this).addClass('active').next('.js-tab-content').slideDown(200);
 		}
 	})
-	
+
+
+    //item-tile-video
+    $('.js-btn-video').on('click', function () {
+        let videoURL = $(this).parent('.item-tile-video').attr('data-video');
+        $(this).parents('.item-tile-video').addClass('active');
+        $(this).parents('.item-tile-video').append('<iframe width="100%" height="100%" src="' + videoURL + '" frameborder="0" allowfullscreen></iframe>')
+        return false;
+    })
+
+    
+    //tile-service
+    $('.item-tile-service .button-show').on('click', function() {
+        $(this).parents('.item-tile-service').addClass('tile-open').find('.tile-outer-wrap').slideDown(200);
+        return false;
+    })
+    $('.item-tile-service .button-hide').on('click', function() {
+        $(this).parents('.item-tile-service').removeClass('tile-open').find('.tile-outer-wrap').slideUp(200);
+        return false;
+    })
+
+    //partners-box
+    if (!!$('.partners-box').offset()) {
+        $('.partners-box .slider').slick({
+            dots: false,
+            slidesToShow: 4,
+            variableWidth: false,
+            infinite: false,
+            adaptiveHeight: false,
+            prevArrow: '<span class="btn-action-ico ico-arrow ico-arrow-prev"></span>',
+            nextArrow: '<span class="btn-action-ico ico-arrow ico-arrow-next"></span>',
+            responsive: [
+                {
+                    breakpoint: 640,
+                    settings: {
+                        slidesToShow: 2,
+                    }
+                },
+            ]
+        });
+    }
+
+    //events-box
+    if (!!$('.events-box').offset()) {
+        $('.events-box .slider').slick({
+            dots: false,
+            slidesToShow: 1,
+            variableWidth: false,
+            infinite: false,
+            adaptiveHeight: false,
+            prevArrow: '<span class="btn-action-ico ico-arrow ico-arrow-prev"></span>',
+            nextArrow: '<span class="btn-action-ico ico-arrow ico-arrow-next"></span>',
+        });
+    }
 });
 
 
